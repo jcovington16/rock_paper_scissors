@@ -3,7 +3,7 @@ class Player {
     constructor(name) {
         this.name = name;
         this.wins = 0;
-        this.gesture = ['rock', 'paper', 'scissors', 'lizard', 'spock'];
+        this.gesture = ['Rock', 'Paper', 'Scissors', 'Lizard', 'Spock'];
     }
 }
 
@@ -14,7 +14,7 @@ class Human extends Player {
     }
 
     getGesture(input){
-        return this.gesture[input]; 
+        return this.gesture[input - 1]; 
     }
 }
 
