@@ -1,4 +1,4 @@
-class Players {
+class Player {
 
     constructor(name, wins) {
         this.name = name;
@@ -7,17 +7,17 @@ class Players {
     }
 }
 
-class Human extends Players {
+class Human extends Player {
     constructor(name, wins) {
         super(name, wins)
     }
 
-    getGesture(){
-        
+    getGesture(input){
+        return this.gesture[input]; 
     }
 }
 
-class AI extends Players {
+class AI extends Player {
     constructor(name, wins) {
         super(name, wins)
     }
@@ -29,5 +29,7 @@ class AI extends Players {
 }
 
 exports.module = {
-    player : Player
+    player : Player,
+    human : Human,
+    ai : AI
 }
