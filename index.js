@@ -4,6 +4,7 @@ let {human, ai} = require('./player');
 let {game} = require('./game');
 let user_prompt = require('prompt-sync')();
 
+// start of the game
 function runGame() {
     let newGame = new game();
     newGame.startGame();
@@ -19,6 +20,7 @@ function runGame() {
     return game_option
 }
 
+// allows the user to chose which game option they want
 function gameOption(option, player) {
     switch(option) {
         case '1':
@@ -35,6 +37,7 @@ function gameOption(option, player) {
     }
 }
 
+// Single Player Mode
 function singlePlayerGame(player){
     let computer = new ai('Computer');
     
@@ -42,11 +45,20 @@ function singlePlayerGame(player){
 
     let user_gesture = user_prompt();
     let user_results = player.getGesture(user_gesture)
+
+    let computer_gesture = computer.getGesture();
     
     console.log(user_results);
+    console.log(computer_gesture);
 }
 
+// Multi Player Mode
 function multiPlayerGame(){
+
+}
+
+// Checks the gesture and returns the results on who won.
+function checkGestures(gesture1, guesture2) {
 
 }
 
