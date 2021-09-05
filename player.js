@@ -1,25 +1,27 @@
 class Player {
 
-    constructor(name, wins) {
+    constructor(name) {
         this.name = name;
-        this.wins = wins;
-        this.gesture = ['rock', 'paper', 'scissors', 'lizard', 'spock'];
+        this.wins = 0;
+        this.gesture = ['Rock', 'Paper', 'Scissors', 'Lizard', 'Spock'];
     }
 }
 
 class Human extends Player {
-    constructor(name, wins) {
-        super(name, wins)
+    constructor(name) {
+        super(name)
+        this.wins = 0;
     }
 
     getGesture(input){
-        return this.gesture[input]; 
+        return this.gesture[input - 1]; 
     }
 }
 
 class AI extends Player {
-    constructor(name, wins) {
-        super(name, wins)
+    constructor(name) {
+        super(name)
+        this.wins = 0;
     }
 
     getGesture() {
@@ -28,7 +30,7 @@ class AI extends Player {
     }
 }
 
-exports.module = {
+module.exports = {
     player : Player,
     human : Human,
     ai : AI
