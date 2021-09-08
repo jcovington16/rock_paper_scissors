@@ -44,6 +44,9 @@ class Game {
             case '3':
                 console.log('Exiting...')
                 break;
+            default:
+                console.log(`${option} is not a valid option. Please enter a valid option`)
+                this.startGame();
         }
     }
 
@@ -56,25 +59,25 @@ class Game {
 
         this.player2 = new ai();
 
-        this.singleMatchUp(this.player1, this.player2);
+        let matchup = this.singleMatchUp(this.player1, this.player2);
+        this.checkScores(matchup);
     }
 
     singleMatchUp(player, computer){
-        console.log("Chose your gesture:\n 1: Rock\n 2: Paper\n 3: Scissors\n 4: Lizard\n 5: Spock\n");
-        let i = 0;
-        while(i < 3) {
-            let user_option = user_prompt();
-            let user_gesture = player.getGesture(user_option);
+        
+        while(player.wins < 3 && computer.wins < 3) {
+
+            let user_gesture = player.getGesture();
         
             let computer_gesture = computer.getGesture();
-            console.log(user_gesture, computer_gesture);
+            console.log(`${player.name}: ${user_gesture}\n${computer.name}: ${computer_gesture}\n`);
         
             let results = this.checkGestures(user_gesture, computer_gesture);
-            this.checkScores(results);
-            i++
+            this.checkResults(results);
+            
         }
 
-        console.log(player.wins, computer.wins);
+        return [player.wins, computer.wins];
     }
 
     // Multi Player Mode
@@ -91,8 +94,6 @@ class Game {
         let player2_name = user_prompt();
         this.player2.name = player2_name;
 
-        console.log(this.player1);
-        console.log(this.player2);
 
     }
 
@@ -130,21 +131,34 @@ class Game {
             return true
         }
         else if (gesture1 === gesture2){
-            return `Draw!`
+            return `Draw!\n`
         }
         return false;
     }
 
-    checkScores(results) {
+    checkResults(results) {
         if(results === true) {
+            console.log(`${this.player1.name} wins this round!\n`)
             this.player1.wins += 1
         }
         else if(results === 'Draw!') {
-            console.log('No Score');
+            console.log('Draw!\n');
+
         }
         else {
+            console.log(`${this.player2.name} wins this round!\n`)
             this.player2.wins += 1
         }
+    }
+
+    checkScores(scores) {
+        if (scores[0] > scores[1]){
+            console.log(`${this.player1.name} wins!\n`)
+        }else{
+            console.log(`${this.player2.name} wins!\n`)
+        }
+
+        this.startGame();
     }
 }
 

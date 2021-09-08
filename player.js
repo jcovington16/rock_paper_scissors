@@ -1,3 +1,5 @@
+const user_prompt = require('prompt-sync')();
+
 class Player {
 
     constructor(name) {
@@ -14,8 +16,17 @@ class Human extends Player {
         this.name = name;
     }
 
-    getGesture(input){
-        return this.gesture[input - 1]; 
+    getGesture(){
+        let answers = ['1','2','3','4','5']
+    
+        console.log("Chose your gesture:\n 1: Rock\n 2: Paper\n 3: Scissors\n 4: Lizard\n 5: Spock\n");
+        let user_option = user_prompt();
+        if(answers.includes(user_option)){
+            return this.gesture[user_option - 1];
+        }else{
+            console.log('Invalid input. Try Again!')
+            this.getGesture();
+        } 
     }
 }
 
