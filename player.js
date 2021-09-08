@@ -4,13 +4,14 @@ class Player {
         this.name = name;
         this.wins = 0;
         this.gesture = ['Rock', 'Paper', 'Scissors', 'Lizard', 'Spock'];
+        this.selectGesture = "";
     }
 }
 
 class Human extends Player {
     constructor(name) {
-        super(name)
-        this.wins = 0;
+        super()
+        this.name = name;
     }
 
     getGesture(input){
@@ -19,14 +20,15 @@ class Human extends Player {
 }
 
 class AI extends Player {
-    constructor(name) {
-        super(name)
-        this.wins = 0;
+    constructor() {
+        super()
+        this.name = 'CP30';
     }
 
     getGesture() {
-        const randomGesture = Math.floor(Math.random() * this.gesture.length);
-        return this.gesture[randomGesture];
+        let randomGesture = Math.floor(Math.random() * this.gesture.length);
+        this.selectGesture = this.gesture[randomGesture];
+        return this.selectGesture;
     }
 }
 
