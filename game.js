@@ -67,7 +67,7 @@ class Game {
         
         while(player.wins < 3 && computer.wins < 3) {
 
-            let user_gesture = player.getGesture();
+            let user_gesture = player.getGesture(player);
         
             let computer_gesture = computer.getGesture();
             console.log(`${player.name}: ${user_gesture}\n${computer.name}: ${computer_gesture}\n`);
@@ -83,22 +83,32 @@ class Game {
     // Multi Player Mode
     multiPlayerGame(){
         console.log("Multiplayer Mode Selected....\nPlayer 1 enter your name\n")
-
         let player1_name = user_prompt();
         this.player1.name = player1_name
         
-
+        this.player2 = new human();
         console.log("Player 2 please enter your name...");
-
-        this.player2 = new human;
+        
         let player2_name = user_prompt();
         this.player2.name = player2_name;
 
-
+        let matchup = this.multiplayerMatchUp(this.player1, this.player2);
+        this.checkScores(matchup);
     }
 
-    multiplayerMatchUp(){
+    multiplayerMatchUp(player1, player2){
+        while(player1.wins < 3 && player2.wins < 3){
+            let player1_gesture = player1.getGesture();
 
+            let player2_gesture = player2.getGesture();
+
+            console.log(`${player1.name}: ${player1_gesture}\n${player2.name}: ${player2_gesture}\n`);
+
+            let results = this.checkGestures(player1_gesture, player2_gesture);
+            this.checkResults(results);
+        }
+
+        return [player1.wins, player2.wins];
     }
 
     // Checks the gesture and returns the results on who won.
