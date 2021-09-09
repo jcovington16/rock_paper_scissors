@@ -87,7 +87,7 @@ class Game {
         this.player1.name = player1_name
         
         this.player2 = new human();
-        console.log("Player 2 please enter your name...");
+        console.log("Player 2 please enter your name...\n");
         
         let player2_name = user_prompt();
         this.player2.name = player2_name;
@@ -141,7 +141,7 @@ class Game {
             return true
         }
         else if (gesture1 === gesture2){
-            return `Draw!\n`
+            return null;
         }
         return false;
     }
@@ -151,7 +151,7 @@ class Game {
             console.log(`${this.player1.name} wins this round!\n`)
             this.player1.wins += 1
         }
-        else if(results === 'Draw!') {
+        else if(results === null) {
             console.log('Draw!\n');
 
         }
@@ -167,8 +167,13 @@ class Game {
         }else{
             console.log(`${this.player2.name} wins!\n`)
         }
-
+        this.resetGame();
         this.startGame();
+    }
+
+    resetGame() {
+        this.player1 = new human();
+        this.player2 = null;
     }
 }
 
